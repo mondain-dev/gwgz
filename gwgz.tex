@@ -1,0 +1,216 @@
+\documentclass[openany,a5paper]{utbook}
+
+%% CTeX headings
+\usepackage[fontset=windows, heading=true]{ctex}
+\usepackage{zhnumber}
+\ctexset{
+  chapter = {
+    name        = {古文觀止卷} ,
+    number      = \zhnum{chapter} ,
+    % numbering   = false,
+    format      = \huge\bfseries ,
+    nameformat  = {} ,
+    titleformat = {} ,
+    aftername   = \quad ,
+    beforeskip  = 0 pt ,
+    afterskip   = 20 pt ,
+    afterindent = true ,
+    pagestyle   = main ,
+  } ,
+  section = {
+    numbering   = false ,
+    format      = \Large\bfseries,
+    indent      = 42 pt ,
+    afterindent = true ,
+  }
+}
+
+%% draft watermark
+\usepackage[colorspec=0.9]{draftwatermark}
+\SetWatermarkText{未 經 審 定}
+\SetWatermarkScale{0.5}
+
+%% ToC
+\usepackage[titles]{tocloft}
+\usepackage{everypage}
+\usepackage{calc}
+\makeatletter
+\AddEverypageHook{\if@mainmatter\addtocontents{toc}{
+  \protect\cftsetpnumwidth{\widthof{\thepage} * \real{0.5}}
+  }
+\fi}
+\makeatother
+\renewcommand{\cftchapfont}{\bfseries}
+\renewcommand{\cftchappagefont}{\small}
+\renewcommand{\cftsecpagefont}{\small}
+
+%% ToC: scale page no.
+\usepackage{xstring}
+\newcommand{\scalepagenum}[1]{\StrLeft{\detokenize{#1}}{1}[\firsttoken]\ifcat 一\firsttoken\scalebox{0.5}[1]{#1}\else #1\fi}
+\makeatletter
+\renewcommand{\cftchapfillnum}[1]{%
+    {\cftchapleader}\nobreak
+    \pbox<t>[\@pnumwidth][\cftpnumalign]{{\cftchappagefont\scalepagenum{#1}}}\cftchapafterpnum\par
+  }
+\renewcommand{\cftsecfillnum}[1]{%
+    {\cftsecleader}\nobreak
+    \pbox<t>[\@pnumwidth][\cftpnumalign]{{\cftchappagefont\scalepagenum{#1}}}\cftsecafterpnum\par
+}
+\makeatother
+\renewcommand{\contentsname}{古文觀止目錄}
+
+%% page style
+\zhnumsetup{style=Traditional}
+\usepackage{titleps}
+\newcommand\frontchaptertitle{}
+\makeatletter
+  \def\mainchapterheader{
+    \if@mainmatter
+      \raisebox{\dimexpr-\height-\headsep\relax}[0pt]{%
+        \hbox to \textheight{%
+          \tate\hspace{3zh}\small
+          \ifnum\value{chapter} > \z@
+            \CTEXthechapter\quad\chaptertitle
+          \else
+            \frontchaptertitle
+          \fi\hfill
+          \scalebox{0.5}[1]{\thepage}\hspace{4zh}}}%
+    \else
+      \raisebox{\dimexpr-\height-\headsep\relax}[0pt]{%
+        \hbox to \textheight{%
+          \tate\hspace{3zh}\small\chaptertitle\hfill
+          \thepage\hspace{4zh}}}%
+    \fi
+  }
+  \newpagestyle{main}{%
+    \widenhead{30pt}{30pt}%
+    \sethead[][][{\mainchapterheader}]{\mainchapterheader}{}{}
+  }
+\makeatother
+\pagestyle{main}
+
+\addtolength{\textwidth}{\footskip}
+
+%% underlines
+\usepackage[normalem]{ulem}
+\newcommand\ProperName[1]{\hskip.1zw\uline{\kern-.1zw#1\kern-.1zw}\kern.1zw}
+% \newcommand\PlaceName[1]{\def\tempdepth{\the\ULdepth}\setlength{\ULdepth}{.75zw}\hskip.1zw\uuline{\kern-.1zw#1\kern-.1zw}\kern.1zw\setlength{\ULdepth}{\tempdepth}}
+\newcommand\smallwave{\bgroup \markoverwith{\lower0.9zh\hbox{$\tilde{\null\kern0.25zw}$}}\ULon}
+\newcommand\BookTitle[1]{\hskip.15zw\smallwave{\kern-.1zw#1\kern-.1zw}\kern.1zw}
+
+%% critical apparatus
+\usepackage{endnotes}
+\newlength{\moziretuhaba}
+\newlength{\moziretutakasa}
+\newlength{\mozireturaise}
+\newlength{\moziretuskip}
+\def\makenotenumbermark#1{\settowidth{\moziretuhaba}{{\scriptsize #1}}%
+        \addtolength{\moziretuhaba}{2pt}%
+        \settoheight{\moziretutakasa}{{\scriptsize #1}}%
+        \setlength{\mozireturaise}{\dimexpr(0.2zw+\moziretutakasa)\relax}%
+        \setlength{\moziretuskip}{\dimexpr(1pt)\relax}%
+		\unskip%
+		\hskip\kanjiskip%
+		\parbox[b]{\moziretuhaba}{\hskip\moziretuskip\raisebox{\mozireturaise}{\scriptsize #1}}
+		\unskip%
+		}
+\renewcommand{\makeenmark}{\makenotenumbermark{\scalebox{0.5}[1]{{［\normalfont\zhdigits{\theenmark}］}}}}
+\renewcommand{\enotesize}{\small}
+\renewcommand\enoteheading{
+  \vskip1.5zh % \hrule width 0.3\textwidth height 0.5pt\vskip1em
+  % \fbox{\textbf{校勘記}}
+  % \vskip1em\nopagebreak[4]
+}
+\makeatletter
+\def\enoteformat{%
+  \scalebox{0.5}[1]{{［\normalfont\zhdigits{\theenmark}］}}\enskip
+}
+\makeatother
+
+\usepackage{etoolbox}
+\pretocmd{\chapter}{\setcounter{endnote}{0}}{}{}
+\pretocmd{\section}{\setcounter{endnote}{0}}{}{}
+\makeatletter
+\@addtoreset{endnote}{chapter}  
+\@addtoreset{endnote}{section}
+\makeatother
+
+%% fonts
+\usepackage[dvipdfmx,bookmarksnumbered]{hyperref}
+\DeclareKanjiFamily{JT2}{songext}{}
+\DeclareFontShape{JT2}{songext}{m}{n}{<->uptchrm-v}{}
+\DeclareKanjiFamily{JT2}{songextg}{}
+\DeclareFontShape{JT2}{songextg}{m}{n}{<->uptchgt-v}{}
+
+\AtBeginShipoutFirst{%
+  \special{pdf:mapline uptchrm-v unicode simsunb.ttf -w 1}
+  \special{pdf:mapline uptchgt-v unicode BabelStoneHan -w 1}
+}
+
+%% misc
+\setlength\parindent{2zw}
+\usepackage{multicol}
+\usepackage{relsize}
+
+\begin{document}
+%% Cover
+\pagenumbering{gobble}
+\thispagestyle{empty}
+~\vfill{\Huge\it 古 文 觀 止\quad{\normalsize 意 見 稿}\par}\vfill
+\newpage\thispagestyle{empty}
+\begin{minipage}<y>[htpb]{85mm}
+\vspace{12cm}
+{\centering \footnotesize The source and scripts used to compose this document are available at \url{https://github.com/mondain-dev/gwgz}.\par}
+\end{minipage}
+
+%% ToC
+\frontmatter
+% \renewcommand\thepage{\rensuji{\arabic{page}}\relax}
+\phantomsection
+\renewcommand\thepage{\rensuji{\roman{page}}\relax}
+\begin{multicols}{2}
+\addcontentsline{toc}{chapter}{目錄}
+\tableofcontents
+\end{multicols}
+
+\chapter{凡例}
+\input{tex/note.tex}
+\mainmatter
+\renewcommand\thepage{\zhdigits{\arabic{page}}\relax}
+\chapter[{\small 周文}]{周文}
+\input{tex/book_1.tex}
+
+\chapter[{\small 周文}]{周文}
+\input{tex/book_2.tex}
+
+\chapter[{\small 周文}]{周文}
+\input{tex/book_3.tex}
+
+\chapter[{\small 秦文 楚辭}]{秦文 楚辭}
+\input{tex/book_4.tex}
+
+\chapter[{\small 漢文}]{漢文}
+\input{tex/book_5.tex}
+
+\chapter[{\small 漢文}]{漢文}
+\input{tex/book_6.tex}
+
+\chapter[{\small 六朝 唐文}]{六朝 唐文}
+\input{tex/book_7.tex}
+
+\chapter[{\small 唐文}]{唐文}
+\input{tex/book_8.tex}
+
+\chapter[{\small 唐宋文}]{唐宋文}
+\input{tex/book_9.tex}
+
+\chapter[{\small 宋文}]{宋文}
+\input{tex/book_10.tex}
+
+\chapter[{\small 宋文}]{宋文}
+\input{tex/book_11.tex}
+
+\chapter[{\small 明文}]{明文}
+\input{tex/book_12.tex}
+
+\end{document}
