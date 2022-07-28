@@ -135,8 +135,13 @@
 \@addtoreset{endnote}{section}
 \makeatother
 
+%% misc
+\setlength\parindent{2zw}
+\usepackage{multicol}
+\usepackage{relsize}
+
 %% fonts
-\usepackage[dvipdfmx,bookmarksnumbered]{hyperref}
+\usepackage[dvipdfmx, bookmarksnumbered]{hyperref}
 \DeclareKanjiFamily{JT2}{songext}{}
 \DeclareFontShape{JT2}{songext}{m}{n}{<->uptchrm-v}{}
 \DeclareKanjiFamily{JT2}{songextg}{}
@@ -146,11 +151,6 @@
   \special{pdf:mapline uptchrm-v unicode simsunb.ttf -w 1}
   \special{pdf:mapline uptchgt-v unicode BabelStoneHan -w 1}
 }
-
-%% misc
-\setlength\parindent{2zw}
-\usepackage{multicol}
-\usepackage{relsize}
 
 \begin{document}
 %% Cover
