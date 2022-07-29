@@ -22,6 +22,3 @@ Build using `uplatex`:
 ```
 uplatex gwgz && uplatex gwgz && dvipdfmx gwgz
 ```
-
-## WARNING
-The `gwgz.pdf` is not updated for each commit, therefore may not always represent the current build.
