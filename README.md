@@ -18,7 +18,7 @@ Make sure that the fonts used in this document are reachable:
 ```
 ln -s /path/to/rIMing.ttf rIMing.ttf
 ln -s /path/to/GenSekiGothic-M.ttc GenSekiGothic-M.ttc
-ln -s /path/to/ukai.ttf ukai.ttf
+ln -s /path/to/ukai.ttc ukai.ttc
 ```
 Build using `uplatex`: 
 ```
