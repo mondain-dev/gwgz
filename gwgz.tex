@@ -1,7 +1,7 @@
 \documentclass[openany,a5paper]{utbook}
 
 %% CTeX headings
-\usepackage[fontset=windows, heading=true]{ctex}
+\usepackage[fontset=custom, heading=true]{ctex}
 \usepackage{zhnumber}
 \ctexset{
   chapter = {
@@ -145,23 +145,22 @@
 \usepackage[dvipdfmx, bookmarksnumbered]{hyperref}
 \DeclareKanjiFamily{JT2}{songext}{}
 \DeclareFontShape{JT2}{songext}{m}{n}{<->uptchrm-v}{}
-\DeclareKanjiFamily{JT2}{songextg}{}
-\DeclareFontShape{JT2}{songextg}{m}{n}{<->uptchgt-v}{}
 
 \AtBeginShipoutFirst{%
-  \special{pdf:mapline uptchrm-v unicode simsunb.ttf -w 1}
-  \special{pdf:mapline uptchgt-v unicode BabelStoneHan -w 1}
+  \special{pdf:mapline uptchrm-v unicode rIMing.ttf -w 1}
 }
 
 \begin{document}
 %% Cover
 \pagenumbering{gobble}
 \thispagestyle{empty}
-~\vfill{\it \Huge 古 文 觀 止\quad{\normalsize 徵 求 意 見 稿}\par}\vfill
+~\vfill{\it{\Large\parbox{1zw}{校栞}}\quad\Huge 古 文 觀 止\quad{\normalsize 徵 求 意 見 稿}\par}\vfill
 \newpage\thispagestyle{empty}
 \begin{minipage}<y>[htpb]{85mm}
 \vspace{12cm}
 {\centering \footnotesize The source and scripts used to compose this document are available at \url{https://github.com/mondain-dev/gwgz}. 
+
+The text in this document is typeset in rIMing font based on IPA mj Mincho. More info available at \url{https://github.com/mondain-dev/rIMing}. 
 
 This version was compiled on \today.\par
 }

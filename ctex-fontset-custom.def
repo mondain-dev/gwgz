@@ -1,0 +1,9 @@
+\ProvidesExplFile{ctex-fontset-custom.def}
+  {\ExplFileDate}{2.4.14}{\ExplFileDescription}
+\ctex_set_upfonts:nnnnnn
+  { rIMing.ttf } { GenSekiGothic-M.ttc } { ukai.ttc }
+  { rIMing.ttf  } { rIMing.ttf }
+  { GenSekiGothic-M.ttc }
+\ctex_set_upfamily:nnn { zhsong } { upzhserif } {}
+\ctex_set_upfamily:nnn { zhhei } { upzhsans } {}
+\ctex_set_upfamily:nnn { zhkai } { upzhserifit } {}
