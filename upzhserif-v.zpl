@@ -17,7 +17,7 @@
    )
 (GLUEKERN
    (LABEL D 0)
-   (GLUE D 1 R 0.3 R 0.0 R 0.6)
+   (GLUE D 1 R 0.1 R 0.1 R 0.2)
    (GLUE D 2 R 0.0 R 0.0 R 0.3)
    (GLUE D 3 R -0.1 R 0.2 R 0.0)
    (GLUE D 4 R 0.1 R 0.1 R 0.1)
