@@ -1,5 +1,7 @@
 \documentclass[openany,a5paper]{utbook}
 
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
 %% CTeX headings
 \usepackage[fontset=custom, heading=true]{ctex}
 \usepackage{zhnumber}
@@ -158,7 +160,9 @@
 \newpage\thispagestyle{empty}
 \begin{minipage}<y>[htpb]{85mm}
 \vspace{12cm}
-{\scriptsize The source and scripts used to compose this document are available at \url{https://github.com/mondain-dev/gwgz}. The text in this document is typeset in rIMing font (nightly build) based on IPA mj Mincho. More info available at \url{https://github.com/mondain-dev/rIMing}. 
+{\parskip=5pt \tiny The source and scripts used to compose this document are available at \url{https://github.com/mondain-dev/gwgz}. 
+
+The text in this document is typeset in rIMing font (nightly build) based on IPA mj Mincho. More info available at \url{https://github.com/mondain-dev/rIMing}. 
 
 This version was compiled on \today.\par
 }
