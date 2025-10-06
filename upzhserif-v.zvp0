@@ -20374,7 +20374,7 @@
       )
    )
 (CHARACTER H 3002
-   (CHARWD R 0.5)
+   (CHARWD R 0.8)
    (MAP
       (SETCHAR H 3002)
       )
@@ -20445,13 +20445,14 @@
 (CHARACTER H 300D
    (CHARWD R 0.5)
    (MAP
+      (MOVERIGHT R -0.1)
       (SETCHAR H 300D)
       )
    )
 (CHARACTER H 300E
    (CHARWD R 0.5)
    (MAP
-      (MOVERIGHT R -0.5)
+      (MOVERIGHT R -0.65)
       (SETCHAR H 300E)
       )
    )
@@ -240383,7 +240384,7 @@
       )
    )
 (CHARACTER H FF0C
-   (CHARWD R 0.5)
+   (CHARWD R 0.8)
    (MAP
       (SETCHAR H FF0C)
       )
@@ -240469,16 +240470,16 @@
 (CHARACTER H FF1A
    (CHARWD R 0.6)
    (MAP
-      (MOVERIGHT R 0.1)
-      (MOVEUP R 0.3)
+      (MOVERIGHT R 0.4)
+      (MOVEUP R 0.5)
       (SETCHAR H FF1A)
       )
    )
 (CHARACTER H FF1B
    (CHARWD R 0.6)
    (MAP
-      (MOVERIGHT R 0.1)
-      (MOVEUP R 0.3)
+      (MOVERIGHT R 0.5)
+      (MOVEUP R 0.5)
       (SETCHAR H FF1B)
       )
    )
@@ -240503,7 +240504,6 @@
 (CHARACTER H FF1F
    (CHARWD R 1.0)
    (MAP
-      (MOVERIGHT R 0.1)
       (MOVEUP R 0.1)
       (SETCHAR H FF1F)
       )

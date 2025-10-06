@@ -1,9 +1,24 @@
 \ProvidesExplFile{ctex-fontset-custom.def}
   {\ExplFileDate}{2.4.14}{\ExplFileDescription}
-\ctex_set_upfonts:nnnnnn
-  { rIMing.ttf } { GenSekiGothic-M.ttc } { ukai.ttc }
-  { rIMing.ttf  } { rIMing.ttf }
-  { GenSekiGothic-M.ttc }
+
+
+\ctex_set_zhmap:n {
+  \special { pdf:mapline~upserif-h~unicode~kinghwa.ttf }
+  \special { pdf:mapline~upserif-v~unicode~kinghwa.ttf~-w~1}
+  \special { pdf:mapline~upserifb-h~unicode~OLDHEIGBK.ttf }
+  \special { pdf:mapline~upserifb-v~unicode~OLDHEIGBK.ttf~-w~1}
+  \special { pdf:mapline~upmsl-v~unicode~rIMing.ttf~-w~1}
+}
+
+\ctex_set_upmap_unicode:nnn { upserifit } { ukai.ttc } {}
+\ctex_set_upmap_unicode:nnn { upsans } { OLDHEIGBK.ttf } { OLDHEIGBK.ttf }
+\ctex_set_upmap_unicode:nnn { upmono } { OLDHEIGBK.ttf } {}
+
 \ctex_set_upfamily:nnn { zhsong } { upzhserif } {}
 \ctex_set_upfamily:nnn { zhhei } { upzhsans } {}
 \ctex_set_upfamily:nnn { zhkai } { upzhserifit } {}
+
+\DeclareKanjiFamily{JT2}{songext}{}
+\DeclareFontShape{JT2}{songext}{m}{n}{<->uptchrm-v}{}
+\DeclareKanjiFamily{JY2}{jpmc}{}
+\DeclareFontShape{JY2}{jpmc}{m}{n}{<->upjisr-h}{}

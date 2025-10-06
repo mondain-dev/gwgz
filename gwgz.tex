@@ -1,8 +1,50 @@
-\documentclass[openany,a5paper]{utbook}
+\documentclass[openany, twoside, 12pt]{utbook}
+%%%%%%%%%%%%%%%%%
+%% Page layout %%
+%%%%%%%%%%%%%%%%%
+\usepackage{lltjp-geometry}
+\usepackage[paperheight=222mm, % paper size including bleeding
+            paperwidth=143mm,
+            layout=a5paper, 
+            layoutvoffset=3mm, % bleeding
+            bindingoffset=-3mm % bleeding
+            ]{geometry} 
+% \usepackage{showframe}
 
-\usepackage{lmodern}
+%
+% Adjust the layout to compensate for the diff between paperwidth and 
+% a5paper (421.10078pt). Note: the total length added to \evensidemargin, 
+% \oddsidemargin, and \textheight should equal to \paperwidth-421.10078pt.
+% 
+% \addtolength{\evensidemargin}{0.1\dimexpr(-421.10078pt+\paperwidth)\relax} 
+% \addtolength{\oddsidemargin}{\dimexpr(-421.10078pt+\paperwidth)\relax}
+\addtolength{\textheight}{\dimexpr(-421.10078pt+\paperwidth)\relax} 
+
+% pushing the text body outward from the spine
+\addtolength{\oddsidemargin}{-20pt} 
+\addtolength{\evensidemargin}{20pt}
+\addtolength{\topmargin}{30pt} % pushing the text body downward
+
+%% width from the spine:
+% \newlength{\oddsidewidthfromspine}
+% \setlength{\oddsidewidthfromspine}{\dimexpr(\paperwidth-\textheight-1in-\oddsidemargin-3mm)\relax}
+% \newlength{\evensidewidthfromspine}
+% \setlength{\evensidewidthfromspine}{\dimexpr(1in+\evensidemargin-3mm)\relax}
+% \showthe\oddsidewidthfromspine
+% \showthe\evensidewidthfromspine
+% \showthe\dimexpr(1in+\oddsidemargin-3mm)\relax 
+
+\usepackage{setspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Latin alphabet layout %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tgpagella}
 \usepackage[T1]{fontenc}
-%% CTeX headings
+
+%%%%%%%%%%%%%%%%%%%
+%% CTeX headings %%
+%%%%%%%%%%%%%%%%%%%
 \usepackage[fontset=custom, heading=true]{ctex}
 \usepackage{zhnumber}
 \ctexset{
@@ -28,11 +70,14 @@
 }
 
 %% draft watermark
-\usepackage[colorspec=0.9]{draftwatermark}
-\SetWatermarkText{未 經 審 定}
-\SetWatermarkScale{0.5}
+% \usepackage[colorspec=0.9]{draftwatermark}
+% \SetWatermarkText{未 經 審 定}
+% \SetWatermarkScale{0.5}
+\usepackage{graphicx}
 
-%% ToC
+%%%%%%%%%
+%% ToC %%
+%%%%%%%%%
 \usepackage[titles]{tocloft}
 \usepackage{everypage}
 \usepackage{calc}
@@ -61,7 +106,9 @@
 \makeatother
 \renewcommand{\contentsname}{古文觀止目錄}
 
-%% page style
+%%%%%%%%%%%%%%%%
+%% page style %%
+%%%%%%%%%%%%%%%%
 \zhnumsetup{style=Traditional}
 \usepackage{titleps}
 \newcommand\frontchaptertitle{}
@@ -85,7 +132,7 @@
     \fi
   }
   \newpagestyle{main}{%
-    \widenhead{30pt}{30pt}%
+    \widenhead{24pt}{24pt}%
     \sethead[][][{\mainchapterheader}]{\mainchapterheader}{}{}
   }
 \makeatother
@@ -100,7 +147,10 @@
 \newcommand\smallwave{\bgroup \markoverwith{\lower0.9zh\hbox{$\tilde{\null\kern0.25zw}$}}\ULon}
 \newcommand\BookTitle[1]{\hskip.15zw\smallwave{\kern-.1zw#1\kern-.1zw}\kern.1zw}
 
-%% critical apparatus
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% critical apparatus %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
 \usepackage{endnotes}
 \newlength{\moziretuhaba}
 \newlength{\moziretutakasa}
@@ -129,6 +179,9 @@
 }
 \makeatother
 
+%%%%%%%%%%%%%%%%
+%% sectioning %%
+%%%%%%%%%%%%%%%%
 \usepackage{etoolbox}
 \pretocmd{\chapter}{\setcounter{endnote}{0}}{}{}
 \pretocmd{\section}{\setcounter{endnote}{0}}{}{}
@@ -137,39 +190,101 @@
 \@addtoreset{endnote}{section}
 \makeatother
 
-%% misc
+%%%%%%%%%%%%%%%%%%%%%%%
+%% clear double page %%
+%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\def\emptycleardoublepage{\clearpage\ifodd\c@page\else
+\thispagestyle{empty}%
+\hbox{}\newpage\fi}
+\makeatother
+
+%%%%%%%%%%
+%% misc %%
+%%%%%%%%%%
 \setlength\parindent{2zw}
 \usepackage{multicol}
 \usepackage{relsize}
 \usepackage{datetime}
-
-%% fonts
+\usepackage{longtable}
+\usepackage{bxtexlogo}
 \usepackage[dvipdfmx, bookmarksnumbered]{hyperref}
-\DeclareKanjiFamily{JT2}{songext}{}
-\DeclareFontShape{JT2}{songext}{m}{n}{<->uptchrm-v}{}
 
-\AtBeginShipoutFirst{%
-  \special{pdf:mapline uptchrm-v unicode rIMing.ttf -w 1}
-}
+%%%%%%%%%%
+%% logo %%
+%%%%%%%%%%
+\newcommand{\dubaillogo}{{\centering {Dubail Editions $\cdot$ \setbox0=\hbox{Xg}\raisebox{\dimexpr-\dp0}{\includegraphics[height=1zh]{asset/colophon.eps}}~\par}}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+%% empty page for LS barcode, between cover and interior
+\thispagestyle{empty}%
+\hbox{}\newpage
+\thispagestyle{empty}%
+\hbox{}\newpage
+
+% extra empty page
+\thispagestyle{empty}%
+\hbox{}\newpage
+\thispagestyle{empty}%
+\hbox{}\newpage
+
 %% Cover
 \pagenumbering{gobble}
 \thispagestyle{empty}
-~\vfill{\it{\Large\parbox{1zw}{校栞}}\quad\Huge 古 文 觀 止\quad{\normalsize 徵 求 意 見 稿}\par}\vfill
+{\smash{\begin{minipage}<t>{\textwidth}
+  \vspace{1in}
+  \hspace{30pt}\makebox[10zh][s]{\tate\small\pbox<p>{〔清〕} 吳楚材 吳調侯 編}\\
+  \hspace{30pt}\makebox[10zh][s]{\tate\small 裏瓣編輯部 校}
+\end{minipage}}
+\vfill
+%{\it{\Large\parbox{1zw}{校栞}}\quad\Huge 古 文 觀 止} %\quad{\normalsize 徵 求 意 見 稿}
+\hspace{0zh}\parbox<y>{1in}{\centering\includegraphics[width=1.8cm]{asset/title.eps}}
+\hfill\parbox<y>{0.9\textheight}{\centering\includegraphics[width=1cm]{asset/hsu.eps}\par
+\vskip5pt
+\dubaillogo
+MMXXV \par
+\vspace{30pt}}
+\par% 
+\vfill}
 \newpage\thispagestyle{empty}
-\begin{minipage}<y>[htpb]{85mm}
-\vspace{12cm}
-{\parskip=5pt \tiny The source and scripts used to compose this document are available at \url{https://github.com/mondain-dev/gwgz}. 
+\hfill
+{
+\begin{minipage}<y>[htpb]{\textheight}
+  \dubaillogo
+  \vspace{0.5cm}
+  {\parskip=5pt \scriptsize\centering
+  Dubail Editions is an imprint of DNB Publishing LLC.\par
+  \vspace{0.5cm}
+  First published by Dubail Editions 2024\\
+  Revised Edition 2025\par
+  Copyright \textcopyright\ Dubail Editions 2025 \\
+  All rights reserved.\par
+  
+  \textsc{ISBN}: 979-8-9905384-1-2\par
+  Typeset using \upLaTeX.\\
+  Text set in KingHwa Old Song 京華老宋体 (v2.0).\\
+  Title set in aoyagireisyosimo {\fontfamily{jpmc}\selectfont 青柳隷書しも} (v2.01).\par
+  Please report any errors to \url{editor@dubaileditions.com}
 
-The text in this document is typeset in rIMing font (nightly build) based on IPA mj Mincho. More info available at \url{https://github.com/mondain-dev/rIMing}. 
-
-This version was compiled on \today.\par
-}
+  \vspace{2cm}
+  {\bfseries\large 校栞古文觀止}\par
+  〔清〕 吳楚材 吳調侯 編\par
+  裏瓣編輯部 校\par
+  \textasteriskcentered\par
+  {\normalsize 裏 瓣 書 局 出 版 發 行\par}
+  {如有失校之處，敬希指正：\url{editor@dubaileditions.com}\par}
+  %% build info
+  % The source and scripts used to compose this document are available at \url{https://github.com/mondain-dev/gwgz}.\par
+  % This version was compiled on \today.\par
+  \vspace{0.5in}
+  }
 \end{minipage}
-
+}
 %% ToC
 \frontmatter
+\setstretch{1.15}
+
 % \renewcommand\thepage{\rensuji{\arabic{page}}\relax}
 \phantomsection
 \renewcommand\thepage{\rensuji{\roman{page}}\relax}
@@ -218,4 +333,10 @@ This version was compiled on \today.\par
 \chapter[{\small 明文}]{明文}
 \input{tex/book_12.tex}
 
+\emptycleardoublepage
+%% end page between cover and interior
+\thispagestyle{empty}%
+\hbox{}\newpage
+\thispagestyle{empty}%
+\hbox{}\newpage
 \end{document}
